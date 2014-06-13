@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>Does your stats gruntwork for you</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+    <script src="https://raw.githubusercontent.com/jstat/jstat/master/dist/jstat.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="bayes.js"></script>
+  </head>
+  <body>
+    <div style=float:left>
+      <div class=belief>Prior Belief: <input id="pagb-1" onchange=recalcBayesAndMaybeFpr(0)>
+	<a class=help href=# onclick="showhelp('prior');">?</a></div>
+      <div id=obs>
+	<!--- Will be filled in by the moreObs functions --->
+      </div>
+      <a class=help style="float:right" href=# onclick="showhelp('more');">?</a>
+      <div style="overflow:hidden">
+	<input type=button value="More Independent Observations" onclick=moreObss() style="width:100%;">
+      </div>
+    </div>
+    <div style=overflow:hidden>
+      <div class=help id=priorhelp>
+        <a class=close>&#215;</a>
+	<h4>Prior Belief</h4>
+	How likely this thing seemed <i>before</i> you started making observations.  As the saying goes, "extraordinary claims require extraordinary evidence," and this measures how extraordinary the claim is.  For example, if the hypothesis is that you have a specific disease, the prior is the frequency of that disease in the general population.  If you can't measure directly, a good guideline is that the more complicated the hypothesis is, the lower this should be.
+      </div>
+      <div class=help id=condhelp>
+        <a class=close>&#215;</a>
+	<h4>Conditional Likelihood</h4>
+        How likely this <i>observation</i> is assuming the hypothesis is <i>true</i>.  Often, this can be rounded to 1.
+      </div>
+      <div class=help id=overallhelp>
+        <a class=close>&#215;</a>
+	<h4>Overall Likelihood</h4>
+        How likely this observation is in general, <i>regardless</i> of whether the hypothesis is true.  If the hypothesis is "that man is scandanavian" and the observation is "he's blond", then this is the fraction of all men with blond hair.
+      </div>
+      <div class=help id=fphelp>
+        <a class=close>&#215;</a>
+	<h4>False Positive Rate</h4>
+	How likely this observation is assuming the hypothesis is <i>false</i>.  Sometimes the overall likelihood is hard to find, but we can calculate if for you using this and the other information given.
+      </div>
+      <div class=help id=normhelp>
+        <a class=close>&#215;</a>
+	<h4>Normal Distribution</h4>
+	Sometimes the false positive rate is also hard to find.  If the observation comes from a normally distributed population, we can help with that too.  For example, if the observation is that a man is very short, you can enter the mean and standard deviation of male heights in his country, and his height, and we'll compute the likelihood of his being that short without special circumstances.  Normal distributions are very common in nature, though not universal.
+      </div>
+      <div class=help id=binomhelp>
+        <a class=close>&#215;</a>
+	<h4>Binomial Distribution</h4>
+	If the observation was something like "we rolled this 4-sided die 10 times and 5 of them rolled 4s" we can calculate the false positive rate for that too.  In that example, the values would be tries=10 normal_rate=0.25 successes=5.
+      </div>
+      <div class=help id=morehelp>
+        <a class=close>&#215;</a>
+	<h4>More Observations</h4>
+	You can provide multiple observations that say things about your hypothesis.  There are two caveats.  First, the observations must be <i>independant</i>.  For example, observing that two experts support something when in fact the second expert based his advise on reading the first one's statement is no good.  Second, you must include <i>all</i> observations.  If you make a lot of observations and only calculate based on the ones you like you'll conclude what you like, rather than what's true.
+      </div>
+    </div>
+    <script>
+      moreObss();
+      $('a.close').attr('href','#').click(close);
+      $('#pagb-1').change(mustBeProbability);
+    </script>
+  </body>
+</html>

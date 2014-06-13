@@ -1,0 +1,55 @@
+input { width:3em; }
+
+div.obs { 
+	  border: thin solid black; 
+	  border-radius: 5px;
+	  padding: 5px;
+	  margin: 10px;
+    display: inline-block;
+    background: #ffc;
+    white-space: nowrap;
+}
+
+div.help {      
+    background: #ccf;
+    -moz-box-shadow: 3px 3px 2px #444;
+    -webkit-box-shadow: 3px 3px 2px #444;
+    box-shadow: 3px 3px 2px #444;
+    padding: 2px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    display:none;
+}
+
+div.belief {
+    font-size: larger;
+    color: #333;
+}
+
+div.help h4 { margin: 0px; }
+
+div.option:hover { background: yellow; }
+
+td { vertical-align: top; }
+
+a.help {
+  color: white;
+  background: blue;
+  border-radius: 50%;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 4px;
+  font-weight: 700;
+}
+
+a.close {
+	  color:white;
+	  background: #a00;
+	  border: 3px yellow outset;
+	  margin: 3px;
+	  text-decoration: none;
+	  float: right;
+    font-weight: 900;
+}
+
+div.indent { margin-left: 3em; }
